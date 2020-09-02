@@ -1,0 +1,127 @@
+// Bank ATM using class
+#include<iostream>
+using namespace std;
+class Bank
+{
+    private:
+        int amount;
+        int ID;
+    public:
+        string name;   
+        string p2; 
+
+    void initialise(int rs,int Id){
+            amount=rs;
+            ID=Id;
+    }
+    void withdraw(int rs){
+        if (rs>amount)
+        {
+            cout<<"Amount is less that amount to be withdrawed";
+        }
+        else
+        {
+            cout<<"\nSuccesfully withdrawed: "<<rs<<"\n"<<"\nMoney left in account is: "<<amount-rs<<"\n";
+            amount-=rs;
+        }
+    }
+    void deposit(int rs){
+        if (rs>0)
+        {
+            cout<<"\nSuccessfully added";
+            cout<<"\nThe amount you added: "<<rs<<"\nTotal amount after depositing: "<<rs+amount<<"\n";
+            amount+=rs;
+        }
+    }
+    void check(){
+        cout<<"\nAmount in Account: "<<amount<<"\n";
+    }
+    void transact(int rs){
+        if (rs>amount)
+        {
+            cout<<"\nError, Transfer money is more than money in Account";
+        }
+        else
+        {
+            cout<<"\nSuccessfully Transfered to "<<p2;
+            amount-=rs;
+            cout<<"\nAmount left in your Account: "<<amount<<"\n";
+        }
+        
+        
+    }
+    void loan(int rs){
+        int t;
+        cout<<"\nEnter the amount of time: ";
+        cin>>t;
+        cout<<"\nRate of Interest is 10%";
+        cout<<"\nTotal Amount of money to pay after "<<t<<" years is: "<<(rs*t)/10;
+        amount+=rs;
+        cout<<"\nMoney in Account now is: "<<amount<<"\n";
+    }
+};
+
+int main()
+{
+    Bank bk;
+    int rs,ID,a;
+    cout<<"\n---------WELCOME TO SWISS BANK----------\n";
+    cout<<"Enter your first name: ";
+    cin>>bk.name;
+    cout<<"\nEnter your Account ID for verification: ";
+    cin>>ID;
+    cout<<"\nEnter your account balance for verification: ";
+    cin>>rs;
+    bk.initialise(rs,ID);
+    cout<<"\n!You will get 5 Actions only!\n";
+    for (int i = 0; i < 5; i++)
+    {
+        cout<<"\nActions left:"<<5-i<<"\n";
+        cout<<"\n"<<bk.name<<",\nPress 1 for Withdraw\n2 for Deposit\n3 for Checking balance\n4 for Transfering\n5 for Appying for loan\n6 for Exiting: ";
+        cin>>a;
+        if (a==1)
+        {
+            cout<<"\nEnter the amount to Withdraw: ";
+            cin>>rs;
+            bk.withdraw(rs);
+        }
+        else if (a==2)
+        {
+            cout<<"\nEnter the amount to Deposit: ";
+            cin>>rs;
+            bk.deposit(rs);
+        }
+        else if (a==3)
+        {
+            bk.check();
+        }
+        else if (a==4)
+        {
+            cout<<"\nEnter the person's first name to whom you are sending money to: ";
+            cin>>bk.p2;
+            cout<<"\nEnter the amount of Money: ";
+            cin>>rs;
+            bk.transact(rs);
+        }
+        else if (a==5)
+        {
+            cout<<"\nEnter the amount of money you want to Loan: ";
+            cin>>rs;
+            bk.loan(rs);
+        }
+        else if (a==6)
+        {
+            break;
+        }
+        else
+        {
+            continue;
+        }
+        
+        
+    }
+    bk.check();
+    cout<<"\nGoodBye and have a good day!";
+    
+    return 0;
+}
